@@ -12,11 +12,10 @@ let mainWindow;
 function createMainWindow() {
   mainWindow = new BrowserWindow({
     title: "PTop",
-    width: isDev ? 800 : 500,
-    height: 600,
+    width: isDev ? 800 : 355,
+    height: 500,
     icon: "./assets/icons/icon.png",
     resizable: isDev ? true : false,
-    backgroundColor: "white",
     webPreferences: {
       nodeIntegration: true,
     },
