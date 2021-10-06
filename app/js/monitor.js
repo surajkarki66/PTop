@@ -4,11 +4,21 @@ const cpu = osu.cpu;
 const mem = osu.mem;
 const os = osu.os;
 
+let cpuOverload = 5;
+
 // Run every 2 seconds
 setInterval(() => {
   // CPU Usage
   cpu.usage().then((info) => {
     document.getElementById("cpu-usage").innerText = info + "%";
+    document.getElementById("cpu-progress").style.width = info + "%";
+
+    // Make the progress bar red if overload
+    if (info > cpuOverload) {
+      document.getElementById("cpu-progress").style.background = "red";
+    } else {
+      document.getElementById("cpu-progress").style.background = "#30c88b ";
+    }
   });
 
   // CPU free
