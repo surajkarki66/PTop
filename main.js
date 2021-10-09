@@ -6,14 +6,13 @@ const MainWindow = require("./MainWindow");
 const AboutWindow = require("./AboutWindow");
 
 // Set env
-process.env.NODE_ENV = "development";
+process.env.NODE_ENV = "production";
 
 const isDev = process.env.NODE_ENV !== "production" ? true : false;
 const isMac = process.platform === "darwin" ? true : false;
 const isLinux = process.platform === "linux" ? true : false;
 
 let mainWindow;
-let aboutWindow;
 let tray;
 
 // Init store and defaults
@@ -33,7 +32,7 @@ function createMainWindow() {
   mainWindow = new MainWindow("./app/index.html", isDev);
 }
 function createAboutWindow() {
-  aboutWindow = new AboutWindow("./app/about.html");
+  new AboutWindow("./app/about.html");
 }
 
 app.on("ready", () => {
