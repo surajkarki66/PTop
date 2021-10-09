@@ -4,13 +4,18 @@ const osu = require("node-os-utils");
 const cpu = osu.cpu;
 const mem = osu.mem;
 const os = osu.os;
+const drive = osu.drive;
 
 let cpuOverload;
+let ramOverload;
+let driveOverload;
 let alertFrequency;
 
 // Get settings and values
 ipcRenderer.on("settings:get", (e, settings) => {
   cpuOverload = +settings.cpuOverload;
+  ramOverload = +settings.ramOverload;
+  driveOverload = +settings.driveOverload;
   alertFrequency = +settings.alertFrequency;
 });
 
@@ -25,7 +30,7 @@ setInterval(() => {
     if (info >= cpuOverload) {
       document.getElementById("cpu-progress").style.background = "red";
     } else {
-      document.getElementById("cpu-progress").style.background = "#30c88b ";
+      document.getElementById("cpu-progress").style.background = "#67c5eb";
     }
 
     // Check overloading
@@ -44,6 +49,58 @@ setInterval(() => {
     document.getElementById("cpu-free").innerText = info + "%";
   });
 
+  // RAM usage
+  mem.info().then((info) => {
+    const memInPer = (info.usedMemMb / info.totalMemMb) * 100;
+    document.getElementById("ram-progress").style.width = memInPer + "%";
+
+    // Make the progress bar red if overload
+    if (memInPer >= ramOverload) {
+      document.getElementById("ram-progress").style.background = "red";
+    } else {
+      document.getElementById("ram-progress").style.background = "#67c5eb";
+    }
+
+    // Check overloading
+    if (memInPer >= ramOverload && runNotify(alertFrequency)) {
+      notifyUser({
+        title: "RAM is nearly Out of storage",
+        body: `${info.usedMemMb} MB RAM is used`,
+        icon: path.join(__dirname, "img", "icon.png"),
+      });
+      localStorage.setItem("lastNotified", +new Date());
+    }
+    document.getElementById("ram-usage").innerText = info.usedMemMb + " MB";
+    document.getElementById("ram-free").innerText = info.freeMemMb + " MB";
+    document.getElementById("ram-total").innerText = info.totalMemMb + " MB";
+  });
+
+  // Drive usage
+  drive.info().then((info) => {
+    document.getElementById("drive-progress").style.width =
+      info.usedPercentage + "%";
+
+    // Make the progress bar red if overload
+    if (info.usedPercentage >= driveOverload) {
+      document.getElementById("drive-progress").style.background = "red";
+    } else {
+      document.getElementById("drive-progress").style.background = "#67c5eb";
+    }
+
+    // Check overloading
+    if (info.usedPercentage >= driveOverload && runNotify(alertFrequency)) {
+      notifyUser({
+        title: "Drive storage is nearly Out of storage",
+        body: `${info.usedGb} GB is used`,
+        icon: path.join(__dirname, "img", "icon.png"),
+      });
+      localStorage.setItem("lastNotified", +new Date());
+    }
+    document.getElementById("drive-usage").innerText = info.usedGb + " GB";
+    document.getElementById("drive-free").innerText = info.freeGb + " GB";
+    document.getElementById("drive-total").innerText = info.totalGb + " GB";
+  });
+
   // Uptime
   document.getElementById("sys-uptime").innerText = secondsToDhms(os.uptime());
 }, 2000);
@@ -56,12 +113,6 @@ document.getElementById("comp-name").innerText = os.hostname();
 
 // OS
 document.getElementById("os").innerText = `${os.type()} ${os.arch()}`;
-
-// Total memory
-mem.info().then((info) => {
-  document.getElementById("mem-total").innerText =
-    info.totalMemMb + " " + "Megabytes";
-});
 
 // Shows days, hours, mins, seconds
 function secondsToDhms(seconds) {

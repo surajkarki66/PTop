@@ -1,5 +1,5 @@
 :root {
-  --primary-color: #30c88b;
+  --primary-color: #67c5eb;
   --background-color: #000;
   --secondary-background-color: #333;
 }
@@ -109,8 +109,8 @@ nav ul li p {
 .alert {
   text-align: center;
   padding: 5px;
-  color: rgb(11, 165, 11);
-  border: rgb(11, 165, 11) 1px solid;
+  color: #67c5eb;
+  border: #67c5eb 1px solid;
 }
 
 .form-control {
