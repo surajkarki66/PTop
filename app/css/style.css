@@ -142,3 +142,13 @@ nav ul li p {
 .btn:focus {
   outline: 0;
 }
+
+.about {
+  width: 90%;
+  background-color: black;
+}
+
+.about .collection .collection-item {
+  color: white;
+  background-color: black;
+}

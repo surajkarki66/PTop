@@ -3,15 +3,17 @@ const { app, Menu, ipcMain, Tray } = require("electron");
 
 const Store = require("./Store");
 const MainWindow = require("./MainWindow");
+const AboutWindow = require("./AboutWindow");
 
 // Set env
-process.env.NODE_ENV = "production";
+process.env.NODE_ENV = "development";
 
 const isDev = process.env.NODE_ENV !== "production" ? true : false;
 const isMac = process.platform === "darwin" ? true : false;
 const isLinux = process.platform === "linux" ? true : false;
 
 let mainWindow;
+let aboutWindow;
 let tray;
 
 // Init store and defaults
@@ -29,6 +31,9 @@ const store = new Store({
 
 function createMainWindow() {
   mainWindow = new MainWindow("./app/index.html", isDev);
+}
+function createAboutWindow() {
+  aboutWindow = new AboutWindow("./app/about.html");
 }
 
 app.on("ready", () => {
@@ -51,7 +56,7 @@ app.on("ready", () => {
 
   const icon = path.join(__dirname, "assets", "icons", "tray_icon.png");
 
-  // Create tray
+  // System tray
   tray = new Tray(icon);
 
   const contextMenu = Menu.buildFromTemplate([
@@ -77,6 +82,7 @@ app.on("ready", () => {
   });
 
   tray.setToolTip("PTop");
+
   if (isLinux) {
     // Make a change to the context menu
     contextMenu.items[0].checked = false;
@@ -85,14 +91,28 @@ app.on("ready", () => {
     tray.setContextMenu(contextMenu);
   }
 
+  // Garbage collection
   mainWindow.on("ready", () => mainWindow == null);
 });
 
 const menu = [
-  ...(isMac ? [{ role: "appMenu" }] : []),
-  {
-    role: "fileMenu",
-  },
+  ...(isMac
+    ? [
+        {
+          label: app.name,
+          submenu: [{ label: "About", click: createAboutWindow }],
+        },
+      ]
+    : []),
+  { role: "fileMenu" },
+  ...(!isMac
+    ? [
+        {
+          label: "Help",
+          submenu: [{ label: "About", click: createAboutWindow }],
+        },
+      ]
+    : []),
   ...(isDev
     ? [
         {
@@ -100,14 +120,13 @@ const menu = [
           submenu: [
             { role: "reload" },
             { role: "forcereload" },
-            { type: "separator" },
+            { role: "separator" },
             { role: "toggledevtools" },
           ],
         },
       ]
     : []),
 ];
-
 // Set settings
 ipcMain.on("settings:set", (e, value) => {
   store.set("settings", value);

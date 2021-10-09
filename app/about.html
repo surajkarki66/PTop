@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' 'unsafe-inline' "
+    />
+    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="css/materialize.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <title>About PTop</title>
+  </head>
+  <body>
+    <div class="container about center-align">
+      <h4><i class="fas fa-images"></i> PTop</h4>
+      <ul class="collection">
+        <li class="collection-item" id="developer-name"></li>
+        <li class="collection-item" id="version"></li>
+      </ul>
+    </div>
+    <script>
+      const pkg = require("../package.json");
+      document.getElementById("developer-name").innerText =
+        "Developer: " + pkg.author;
+      document.getElementById("version").innerText = "Version: " + pkg.version;
+    </script>
+  </body>
+</html>
