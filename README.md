@@ -23,18 +23,21 @@ This is a cross-platform desktop application to check and monitor your system.
 ### For Linux:
 
 ```bash
+  $ yarn install
   $ yarn run dist:linux
 ```
 
 ## For MacOS:
 
 ```bash
+  $ yarn install
   $ yarn run dist:macos
 ```
 
 ## For Windows:
 
 ```bash
+  $ yarn install
   $ yarn run dist:win
 ```
 
