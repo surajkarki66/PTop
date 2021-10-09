@@ -6,11 +6,12 @@
   "scripts": {
     "start": "electron .",
     "dev": "nodemon --exec electron .",
+    "dist:win": "electron-builder --windows",
     "dist:linux": "electron-builder --linux",
     "dist:macos": "electron-builder --macos"
   },
   "repository": "https://github.com/surajkarki66/PTop.git",
-  "author": "Suraj Karki",
+  "author": "Suraj Karki <suraj.karki500@protonmail.com>",
   "license": "GPL-3.0",
   "private": false,
   "devDependencies": {
@@ -26,11 +27,20 @@
     "linux": {
       "target": [
         "deb",
-        "snap",
         "pacman",
         "appImage"
       ],
+      "icon": "assets/icons/linux/Icon.png",
       "category": "Utility"
+    },
+    "win": {
+      "target": "NSIS",
+      "icon": "assets/icons/win/icon.ico"
+    },
+    "mac": {
+      "target": "zip",
+      "icon": "assets/icons/mac/icon.icns",
+      "category": "public.app-category.utility"
     }
   }
 }
