@@ -11,6 +11,7 @@
   },
   "repository": "https://github.com/surajkarki66/PTop.git",
   "author": "Suraj Karki",
+  "license": "GPL-3.0",
   "private": false,
   "devDependencies": {
     "electron": "^15.1.0",
