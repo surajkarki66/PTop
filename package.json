@@ -28,7 +28,10 @@
       "target": [
         "deb",
         "pacman",
-        "appImage"
+        "appImage",
+        "rpm",
+        "snap",
+        "zip"
       ],
       "icon": "assets/icons/linux/Icon.png",
       "category": "Utility"
