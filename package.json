@@ -37,11 +37,15 @@
       "category": "Utility"
     },
     "win": {
-      "target": "NSIS",
+      "target": [
+        "nsis",
+        "msi",
+        "portable"
+      ],
       "icon": "assets/icons/win/icon.ico"
     },
     "mac": {
-      "target": "zip",
+      "target": ["default", "dmg", "mas"],
       "icon": "assets/icons/mac/icon.icns",
       "category": "public.app-category.utility"
     }
