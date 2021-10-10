@@ -34,18 +34,6 @@
         </ul>
         <div id="ram-model"></div>
       </div>
-      <div id="drive-info" class="content show2">
-        <h1> <i class="fas fa-laptop"></i> Drive Storage</h1>
-        <div class="progress-bar">
-          <div class="progress" id="drive-progress"></div>
-        </div>
-        <ul>
-          <li><strong>Drive Usage: </strong><span id="drive-usage"></span></li>
-          <li><strong>Drive Free: </strong><span id="drive-free"></span></li>
-          <li><strong>Drive Total: </strong><span id="drive-total"></span></li>
-        </ul>
-        <div id="drive-model"></div>
-      </div>
       <div class="content">
         <h1><i class="fas fa-info"></i> System Info</h1>
         <ul>
@@ -67,10 +55,6 @@
             <input type="number" id="ram-overload" />
           </div>
           <div class="form-control">
-            <label for="drive-overload">Drive Storage Full Warning %</label>
-            <input type="number" id="drive-overload" />
-          </div>
-          <div class="form-control">
             <label for="alert-frequency">Alert Frequency (In Minutes)</label>
             <input type="number" id="alert-frequency" />
           </div>
@@ -87,10 +71,6 @@
         <li>
           <i class="fas fa-memory"></i>
           <p>RAM</p>
-        </li>
-        <li>
-          <i class="fas fa-laptop"></i>
-          <p>Drive</p>
         </li>
         <li>
           <i class="fas fa-info"></i>
@@ -112,7 +92,6 @@
       ipcRenderer.on("settings:get", (e, settings) => {
         document.getElementById("cpu-overload").value = settings.cpuOverload;
         document.getElementById("ram-overload").value = settings.ramOverload;
-        document.getElementById("drive-overload").value = settings.driveOverload;
         document.getElementById("alert-frequency").value =
           settings.alertFrequency;
       });
@@ -122,7 +101,6 @@
         e.preventDefault();
         const cpuOverload = document.getElementById("cpu-overload").value;
         const ramOverload = document.getElementById("ram-overload").value
-        const driveOverload = document.getElementById("drive-overload").value
         const alertFrequency = document.getElementById("alert-frequency").value;
 
         // Send new settings to main process
@@ -130,7 +108,6 @@
           cpuOverload,
           alertFrequency,
           ramOverload,
-          driveOverload,
         });
         showAlert("Settings Saved");
       });

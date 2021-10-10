@@ -22,7 +22,6 @@ const store = new Store({
     settings: {
       ramOverload: 90,
       cpuOverload: 90,
-      driveOverload: 90,
       alertFrequency: 5,
     },
   },
