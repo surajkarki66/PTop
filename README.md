@@ -20,6 +20,8 @@ This is a cross-platform desktop application to check and monitor your system.
 
 ## Building app for different platforms
 
+You can either use npm or yarn doesn't matter.
+
 ### For Linux:
 
 ```bash
@@ -27,18 +29,18 @@ This is a cross-platform desktop application to check and monitor your system.
   $ yarn run dist:linux
 ```
 
-## For MacOS:
+### For MacOS:
 
 ```bash
   $ yarn install
   $ yarn run dist:macos
 ```
 
-## For Windows:
+### For Windows:
 
 ```bash
   $ yarn install
   $ yarn run dist:win
 ```
 
-After building ,the build files will be stored in build directory.
+After building ,the build files will be stored in dist directory.
