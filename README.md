@@ -18,7 +18,11 @@ This is a cross-platform desktop application to check and monitor your system.
   $ npm start
 ```
 
-## Building app for different platforms
+
+## Downloading the application for different operating systems
+You can download binary or executable of the application from github releases at the right side of this page for different operating systems.
+
+## Building application for different platforms
 
 You can either use npm or yarn doesn't matter.
 
@@ -43,4 +47,4 @@ You can either use npm or yarn doesn't matter.
   $ yarn run dist:win
 ```
 
-After building ,the build files will be stored in dist directory.
+`After building ,the build files will be stored in dist directory.`
