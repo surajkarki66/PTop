@@ -15,7 +15,7 @@
   "license": "GPL-3.0",
   "private": false,
   "devDependencies": {
-    "electron": "^15.1.0",
+    "electron": "^15.5.5",
     "electron-builder": "^22.11.7",
     "nodemon": "^2.0.13"
   },
