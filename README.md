@@ -3,6 +3,10 @@
 This is a cross-platform desktop application to check and monitor your system.
 
 ## Running locally
+Clone the repository
+```bash
+   git clone https://github.com/surajkarki66/PTop
+```
 
 ### Using yarn
 
@@ -23,7 +27,10 @@ This is a cross-platform desktop application to check and monitor your system.
 You can download the binary or executable of the application from GitHub releases at the right side of this page for different operating systems.
 
 ## Building applications for different platforms
-
+Clone the repository
+```bash
+   git clone https://github.com/surajkarki66/PTop
+```
 You can either use npm or yarn doesn't matter.
 
 ### For Linux:
